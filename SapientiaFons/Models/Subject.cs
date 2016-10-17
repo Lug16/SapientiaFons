@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SapientiaFons.Models
 {
-    public class SubjectModel
+    public class Subject
     {
         [Required]
         public int Id { get; set; }

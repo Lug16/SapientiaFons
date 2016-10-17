@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SapientiaFons.Models
 {
-    public class ActivityModel
+    public class Activity
     {
         public int Id { get; set; }
 
-        public SubjectModel Subject { get; set; }
+        public Subject Subject { get; set; }
 
         [Required]
         public int SubjectId { get; set; }

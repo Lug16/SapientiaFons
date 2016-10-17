@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SapientiaFons.Models
 {
-    public class MaterialModel
+    public class Material
     {
-        public SubjectModel Subject { get; set; }
+        public Subject Subject { get; set; }
 
         [Required]
         public int SubjectId { get; set; }

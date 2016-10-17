@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -15,24 +14,6 @@ namespace SapientiaFons.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
             return userIdentity;
-        }
-    }
-
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public DbSet<MaterialModel> Materials { get; set; }
-
-        public DbSet<SubjectModel> Subjects { get; set; }
-
-        public DbSet<ActivityModel> Activities { get; set; }
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
-
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using SapientiaFons.Models;
+﻿using Microsoft.AspNet.Identity;
+using SapientiaFons.Models;
+using SapientiaFons.ViewModels;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -6,7 +9,7 @@ using System.Web.Mvc;
 
 namespace SapientiaFons.Controllers
 {
-    public class SubjectModelsController : Controller
+    public class SubjectController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -14,7 +17,7 @@ namespace SapientiaFons.Controllers
         public ActionResult Index()
         {
             var subjects = db.Subjects.Include(s => s.User);
-            return View(subjects.ToList());
+            return View(subjects.Select(r => new SubjectViewModel { Date = r.Date, Description = r.Description, Id = r.Id, ShortUrl = r.ShortUrl, Title = r.Title }));
         }
 
         // GET: SubjectModels/Details/5
@@ -24,12 +27,12 @@ namespace SapientiaFons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SubjectModel subjectModel = db.Subjects.Find(id);
+            Subject subjectModel = db.Subjects.Find(id);
             if (subjectModel == null)
             {
                 return HttpNotFound();
             }
-            return View(subjectModel);
+            return View(new SubjectViewModel { Id = id.Value, Description = subjectModel.Description, Title = subjectModel.Title, Date = subjectModel.Date, ShortUrl = subjectModel.ShortUrl });
         }
 
         // GET: SubjectModels/Create
@@ -44,17 +47,26 @@ namespace SapientiaFons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserId,Title,Description,Date,ShortUrl")] SubjectModel subjectModel)
+        public ActionResult Create([Bind(Include = "Title,Description")] SubjectViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Subjects.Add(subjectModel);
+                var subject = new Subject
+                {
+                    Date = DateTime.Now,
+                    ShortUrl = string.Empty,
+                    Title = viewModel.Title,
+                    UserId = User.Identity.GetUserId(),
+                    Description = viewModel.Description
+                };
+
+                db.Subjects.Add(subject);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", subjectModel.UserId);
-            return View(subjectModel);
+            //ViewBag.UserId = new SelectList(db.Users, "Id", "Email", subjectModel.UserId);
+            return View(viewModel);
         }
 
         // GET: SubjectModels/Edit/5
@@ -64,13 +76,13 @@ namespace SapientiaFons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SubjectModel subjectModel = db.Subjects.Find(id);
+            Subject subjectModel = db.Subjects.Find(id);
             if (subjectModel == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", subjectModel.UserId);
-            return View(subjectModel);
+            //ViewBag.UserId = new SelectList(db.Users, "Id", "Email", subjectModel.UserId);
+            return View(new SubjectViewModel { Id = id.Value, Description = subjectModel.Description, Title = subjectModel.Title });
         }
 
         // POST: SubjectModels/Edit/5
@@ -78,16 +90,21 @@ namespace SapientiaFons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId,Title,Description,Date,ShortUrl")] SubjectModel subjectModel)
+        public ActionResult Edit([Bind(Include = "Id,Title,Description")] SubjectViewModel model)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(subjectModel).State = EntityState.Modified;
+                var subject = db.Subjects.Where(r => r.Id == model.Id).Single();
+
+                subject.Title = model.Title;
+                subject.Description = model.Description;
+
+                db.Entry(subject).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", subjectModel.UserId);
-            return View(subjectModel);
+            //ViewBag.UserId = new SelectList(db.Users, "Id", "Email", subjectModel.UserId);
+            return View(model);
         }
 
         // GET: SubjectModels/Delete/5
@@ -97,12 +114,12 @@ namespace SapientiaFons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SubjectModel subjectModel = db.Subjects.Find(id);
+            Subject subjectModel = db.Subjects.Find(id);
             if (subjectModel == null)
             {
                 return HttpNotFound();
             }
-            return View(subjectModel);
+            return View(new SubjectViewModel { Id = id.Value, Description = subjectModel.Description, Title = subjectModel.Title, Date = subjectModel.Date, ShortUrl = subjectModel.ShortUrl });
         }
 
         // POST: SubjectModels/Delete/5
@@ -110,7 +127,7 @@ namespace SapientiaFons.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SubjectModel subjectModel = db.Subjects.Find(id);
+            Subject subjectModel = db.Subjects.Find(id);
             db.Subjects.Remove(subjectModel);
             db.SaveChanges();
             return RedirectToAction("Index");

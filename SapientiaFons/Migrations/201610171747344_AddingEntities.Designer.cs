@@ -7,13 +7,13 @@ namespace SapientiaFons.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddMaterial : IMigrationMetadata
+    public sealed partial class AddingEntities : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddMaterial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddingEntities));
         
         string IMigrationMetadata.Id
         {
-            get { return "201610140455228_AddMaterial"; }
+            get { return "201610171747344_AddingEntities"; }
         }
         
         string IMigrationMetadata.Source

@@ -12,7 +12,7 @@ namespace SapientiaFons.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "SubjectModels");
+                return RedirectToAction("Index", "Subject");
             }
         }
 
