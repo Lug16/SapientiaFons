@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SapientiaFons.Models
 {
@@ -33,6 +34,8 @@ namespace SapientiaFons.Models
             }
         }
 
+        [Index(IsUnique = true)]
+        [StringLength(7)]
         public string ShortUrl { get; set; }
     }
 }

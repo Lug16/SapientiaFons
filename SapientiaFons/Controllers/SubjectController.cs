@@ -54,7 +54,7 @@ namespace SapientiaFons.Controllers
                 var subject = new Subject
                 {
                     Date = DateTime.Now,
-                    ShortUrl = string.Empty,
+                    ShortUrl = db.GetShortUrl(),
                     Title = viewModel.Title,
                     UserId = User.Identity.GetUserId(),
                     Description = viewModel.Description

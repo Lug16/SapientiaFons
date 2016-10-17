@@ -183,6 +183,10 @@
     <Compile Include="Migrations\201610171747344_AddingEntities.Designer.cs">
       <DependentUpon>201610171747344_AddingEntities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610171930499_AddingShortURLFunctionality.cs" />
+    <Compile Include="Migrations\201610171930499_AddingShortURLFunctionality.Designer.cs">
+      <DependentUpon>201610171930499_AddingShortURLFunctionality.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -300,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610171747344_AddingEntities.resx">
       <DependentUpon>201610171747344_AddingEntities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610171930499_AddingShortURLFunctionality.resx">
+      <DependentUpon>201610171930499_AddingShortURLFunctionality.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Data.Entity;
+using System.Linq;
 
 namespace SapientiaFons.Models
 {
@@ -18,6 +20,20 @@ namespace SapientiaFons.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        public string GetShortUrl()
+        {
+            var result = string.Empty;
+
+            while (string.IsNullOrEmpty(result) || this.Subjects.Where(r => r.ShortUrl == result).Any())
+            {
+                var guid = Guid.NewGuid().ToString();
+
+                result = guid.Split('-')[0].Substring(0, 7);
+            }
+
+            return result;
         }
     }
 }
