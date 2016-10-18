@@ -4,4 +4,11 @@
     {
         QuestionAnswer
     }
+
+    public enum MaterialTypes
+    {
+        Pdf,
+        Vid,
+        Pps
+    }
 }

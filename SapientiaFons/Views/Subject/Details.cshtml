@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Tema - @Model.Title</h2>
 
 <div>
-    <h4>Subject</h4>
+    <h4>Detalles</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -45,7 +45,11 @@
 
     </dl>
 </div>
+<div>
+    <h3>Materiales</h3>
+    @Html.Partial("_MaterialList", (IEnumerable<SapientiaFons.Models.Material>)ViewBag.Materials)
+</div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver a la lista", "Index")
 </p>

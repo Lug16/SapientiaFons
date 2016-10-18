@@ -13,14 +13,17 @@ namespace SapientiaFons.Models
 
         [Required]
         [StringLength(4)]
+        [Display(Name = "Tipo")]
         public string Type { get; set; }
 
         [Required]
         [StringLength(2083)]
+        [Display(Name = "Ubicación")]
         public string Location { get; set; }
 
         [Required]
         [StringLength(1000)]
+        [Display(Name = "Descripción")]
         public string Description { get; set; }
     }
 
