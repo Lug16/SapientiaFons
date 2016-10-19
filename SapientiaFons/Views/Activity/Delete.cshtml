@@ -1,28 +1,20 @@
-﻿@model SapientiaFons.Models.Material
+﻿@model SapientiaFons.Models.Activity
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>¿Estas seguro que quieres eliminar este material?</h3>
+<h3>¿Estas seguro que quieres eliminar esta actividad?</h3>
 <div>
     <h4>Esto es irreversible</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Location)
+            @Html.DisplayFor(model => model.Name)
         </dd>
 
         <dt>
@@ -31,6 +23,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
         </dd>
 
     </dl>

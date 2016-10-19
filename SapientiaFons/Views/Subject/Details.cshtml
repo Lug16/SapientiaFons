@@ -9,6 +9,10 @@
 
 <div>
     <h4>Detalles</h4>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Volver a la lista", "Index")
+    </p>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -49,7 +53,7 @@
     <h3>Materiales</h3>
     @Html.Partial("_MaterialList", (IEnumerable<SapientiaFons.Models.Material>)ViewBag.Materials)
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Volver a la lista", "Index")
-</p>
+<div>
+    <h3>Actividades</h3>
+    @Html.Partial("_ActivityList", (IEnumerable<SapientiaFons.Models.Activity>)ViewBag.Activities)
+</div>

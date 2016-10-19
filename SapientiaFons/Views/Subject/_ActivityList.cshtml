@@ -1,0 +1,40 @@
+﻿@model IEnumerable<SapientiaFons.Models.Activity>
+
+<p>
+    @Html.ActionLink("Crear Nueva", "Create", "Activity", new { subjectId = ViewBag.SubjectId }, null)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", "Activity", new { id = item.Id }, null) |
+                @Html.ActionLink("Detalles", "Details", "Activity", new { id = item.Id }, null) |
+                @Html.ActionLink("Borrar", "Delete", "Activity", new { id = item.Id }, null)
+            </td>
+        </tr>
+    }
+
+</table>

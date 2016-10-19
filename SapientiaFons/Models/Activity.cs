@@ -14,12 +14,15 @@ namespace SapientiaFons.Models
 
         [Required]
         [StringLength(100)]
+        [Display(Name = "Nombre")]
         public string Name { get; set; }
 
         [StringLength(1000)]
+        [Display(Name = "Descripción")]
         public string Description { get; set; }
 
         [Required]
+        [Display(Name = "Tipo")]
         public ActivityTypes Type { get; set; }
     }
 }
