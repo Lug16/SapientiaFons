@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace SapientiaFons.Controllers
 {
+    [Authorize]
     public class SubjectController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -16,7 +17,8 @@ namespace SapientiaFons.Controllers
         // GET: SubjectModels
         public ActionResult Index()
         {
-            var subjects = db.Subjects.Include(s => s.User);
+            var userId = User.Identity.GetUserId();
+            var subjects = db.Subjects.Include(s => s.User).Where(r => r.UserId == userId);
             return View(subjects.Select(r => new SubjectViewModel { Date = r.Date, Description = r.Description, Id = r.Id, ShortUrl = r.ShortUrl, Title = r.Title }));
         }
 

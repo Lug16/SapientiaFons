@@ -5,6 +5,7 @@ using System.Web.Mvc;
 
 namespace SapientiaFons.Controllers
 {
+    [Authorize]
     public class ActivityController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
