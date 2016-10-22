@@ -174,6 +174,7 @@
     <Compile Include="Controllers\HypothesisController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -194,12 +195,17 @@
     <Compile Include="Migrations\201610220347408_AddingHypothesis.Designer.cs">
       <DependentUpon>201610220347408_AddingHypothesis.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610220440555_AddingQuestions.cs" />
+    <Compile Include="Migrations\201610220440555_AddingQuestions.Designer.cs">
+      <DependentUpon>201610220440555_AddingQuestions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\Enums\Enumerations.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Hypothesis.cs" />
+    <Compile Include="Models\Question.cs" />
     <Compile Include="ViewModels\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\ConfigureTwoFactorViewModel.cs" />
@@ -312,6 +318,11 @@
     <Content Include="Views\Hypothesis\Details.cshtml" />
     <Content Include="Views\Hypothesis\Edit.cshtml" />
     <Content Include="Views\Subject\_HypothesisList.cshtml" />
+    <Content Include="Views\Question\Create.cshtml" />
+    <Content Include="Views\Question\Delete.cshtml" />
+    <Content Include="Views\Question\Details.cshtml" />
+    <Content Include="Views\Question\Edit.cshtml" />
+    <Content Include="Views\Shared\_QuestionList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -334,6 +345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610220347408_AddingHypothesis.resx">
       <DependentUpon>201610220347408_AddingHypothesis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610220440555_AddingQuestions.resx">
+      <DependentUpon>201610220440555_AddingQuestions.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

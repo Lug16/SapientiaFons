@@ -14,6 +14,8 @@ namespace SapientiaFons.Models
         public DbSet<Activity> Activities { get; set; }
 
         public DbSet<Hypothesis> Hypotheses { get; set; }
+
+        public DbSet<Question> Questions { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

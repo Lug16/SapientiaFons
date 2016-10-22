@@ -13,6 +13,7 @@ namespace SapientiaFons.Models
 
         [Required]
         [StringLength(500)]
+        [DisplayFormat(NullDisplayText = "-")]
         public string Description { get; set; }
 
         [Required]
