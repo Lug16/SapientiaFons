@@ -171,6 +171,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HypothesisController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
@@ -189,11 +190,16 @@
     <Compile Include="Migrations\201610171930499_AddingShortURLFunctionality.Designer.cs">
       <DependentUpon>201610171930499_AddingShortURLFunctionality.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610220347408_AddingHypothesis.cs" />
+    <Compile Include="Migrations\201610220347408_AddingHypothesis.Designer.cs">
+      <DependentUpon>201610220347408_AddingHypothesis.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\Enums\Enumerations.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Hypothesis.cs" />
     <Compile Include="ViewModels\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\ConfigureTwoFactorViewModel.cs" />
@@ -301,6 +307,11 @@
     <Content Include="Views\Activity\Details.cshtml" />
     <Content Include="Views\Activity\Edit.cshtml" />
     <Content Include="Views\Subject\_ActivityList.cshtml" />
+    <Content Include="Views\Hypothesis\Create.cshtml" />
+    <Content Include="Views\Hypothesis\Delete.cshtml" />
+    <Content Include="Views\Hypothesis\Details.cshtml" />
+    <Content Include="Views\Hypothesis\Edit.cshtml" />
+    <Content Include="Views\Subject\_HypothesisList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -320,6 +331,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610171930499_AddingShortURLFunctionality.resx">
       <DependentUpon>201610171930499_AddingShortURLFunctionality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610220347408_AddingHypothesis.resx">
+      <DependentUpon>201610220347408_AddingHypothesis.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

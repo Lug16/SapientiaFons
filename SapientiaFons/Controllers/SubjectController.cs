@@ -38,6 +38,7 @@ namespace SapientiaFons.Controllers
             ViewBag.SubjectId = id;
             ViewBag.Materials = db.Materials.Where(r => r.SubjectId == id).ToArray();
             ViewBag.Activities = db.Activities.Where(r => r.SubjectId == id).ToArray();
+            ViewBag.Hypothesis = db.Hypotheses.Where(r => r.SubjectId == id).ToArray();
 
             return View(new SubjectViewModel { Id = id.Value, Description = subjectModel.Description, Title = subjectModel.Title, Date = subjectModel.Date, ShortUrl = subjectModel.ShortUrl });
         }

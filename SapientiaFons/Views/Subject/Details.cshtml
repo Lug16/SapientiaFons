@@ -50,6 +50,10 @@
     </dl>
 </div>
 <div>
+    <h3>Hipótesis</h3>
+    @Html.Partial("_HypothesisList", (IEnumerable<SapientiaFons.Models.Hypothesis>)ViewBag.Hypothesis)
+</div>
+<div>
     <h3>Materiales</h3>
     @Html.Partial("_MaterialList", (IEnumerable<SapientiaFons.Models.Material>)ViewBag.Materials)
 </div>
