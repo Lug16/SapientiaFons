@@ -14,9 +14,11 @@ namespace SapientiaFons.Models
         [Required]
         [StringLength(500)]
         [DisplayFormat(NullDisplayText = "-")]
+        [Display(Name = "Descripción")]
         public string Description { get; set; }
 
         [Required]
+        [Display(Name = "Es Valido")]
         public bool IsValid { get; set; }
     }
 }

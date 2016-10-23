@@ -1,6 +1,13 @@
-﻿body {
+﻿html {
+    background-color: #f8f9fd;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fd;
+    color: #161848;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +28,42 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.navbar-inverse {
+    background-color: #161848;
+    border-color: #161848;
+}
+
+    .navbar-inverse .navbar-brand {
+        color: #fff;
+        font-size:25px;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #e8e4e4 !important;
+    }
+
+.panel-default {
+    border-color: #ddd;
+    border-top-color: transparent;
+}
+
+    .panel-default > .panel-heading {
+        color: #f5f5f5;
+        background-color: #f8f9fd;
+        border-color: #fff;
+    }
+
+.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: #e5e8f3;
+}
+
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    border: 1px solid #f8f9fd;
+}
+
+.jumbotron {
+    background-color: #fff;
 }

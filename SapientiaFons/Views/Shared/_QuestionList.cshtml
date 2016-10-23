@@ -1,34 +1,35 @@
 ﻿@model IEnumerable<SapientiaFons.Models.Question>
 
-<p>
-    @Html.ActionLink("Crear Nueva", "Create", "Question", new { subjectId = ViewBag.SubjectId, hypothesisId = ViewBag.HypothesisId }, null)
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayName("Hipótesis")
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="panel panel-default">
+    <div class="panel-heading">
+        @Html.ActionLink("Crear Nueva", "Create", "Question", new { subjectId = ViewBag.SubjectId, hypothesisId = ViewBag.HypothesisId }, null)
+    </div>
+    <table class="table table-bordered table-hover">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hypothesis.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", "Question", new { id = item.Id }, null) |
-                @Html.ActionLink("Detalles", "Details", "Question", new { id = item.Id }, null) |
-                @Html.ActionLink("Borrar", "Delete", "Question", new { id = item.Id }, null)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayName("Hipótesis")
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hypothesis.Description)
+                </td>
+                <td class="col-md-3">
+                    @Html.ActionLink("Editar", "Edit", "Question", new { id = item.Id }) |
+                    @Html.ActionLink("Detalles", "Details", "Question", new { id = item.Id }) |
+                    @Html.ActionLink("Borrar", "Delete", "Question", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

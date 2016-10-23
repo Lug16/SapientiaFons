@@ -49,19 +49,28 @@
 
     </dl>
 </div>
-<div>
-    <h3>Hipótesis</h3>
-    @Html.Partial("_HypothesisList", (IEnumerable<SapientiaFons.Models.Hypothesis>)ViewBag.Hypotheses)
+<ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a data-toggle="tab" href="#h">Hipótesis</a> </li>
+    <li role="presentation"><a data-toggle="tab" href="#q">Preguntas</a> </li>
+    <li role="presentation"><a data-toggle="tab" href="#m">Materiales</a> </li>
+    <li role="presentation"><a data-toggle="tab" href="#a">Actividades</a> </li>
+</ul>
+<div class="tab-content">
+    <div id="h" class="tab-pane fade in active">
+        @*<h3>Hipótesis</h3>*@
+        @Html.Partial("_HypothesisList", (IEnumerable<SapientiaFons.Models.Hypothesis>)ViewBag.Hypotheses)
+    </div>
+    <div id="q" class="tab-pane fade">
+        @*<h3>Preguntas</h3>*@
+        @Html.Partial("_QuestionList", (IEnumerable<SapientiaFons.Models.Question>)ViewBag.Questions)
+    </div>
+    <div id="m" class="tab-pane fade">
+        @*<h3>Materiales</h3>*@
+        @Html.Partial("_MaterialList", (IEnumerable<SapientiaFons.Models.Material>)ViewBag.Materials)
+    </div>
+    <div id="a" class="tab-pane fade">
+        @*<h3>Actividades</h3>*@
+        @Html.Partial("_ActivityList", (IEnumerable<SapientiaFons.Models.Activity>)ViewBag.Activities)
+    </div>
 </div>
-<div>
-    <h3>Preguntas</h3>
-    @Html.Partial("_QuestionList", (IEnumerable<SapientiaFons.Models.Question>)ViewBag.Questions)
-</div>
-<div>
-    <h3>Materiales</h3>
-    @Html.Partial("_MaterialList", (IEnumerable<SapientiaFons.Models.Material>)ViewBag.Materials)
-</div>
-<div>
-    <h3>Actividades</h3>
-    @Html.Partial("_ActivityList", (IEnumerable<SapientiaFons.Models.Activity>)ViewBag.Activities)
-</div>
+

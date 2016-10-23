@@ -1,40 +1,42 @@
 ﻿@model IEnumerable<SapientiaFons.Models.Material>
 
-<p>
-    @Html.ActionLink("Crear Nuevo", "Create", "Material", new { subjectId = ViewBag.SubjectId }, null)
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="panel panel-default">
+    <div class="panel-heading">
+        @Html.ActionLink("Crear Nuevo", "Create", "Material", new { subjectId = ViewBag.SubjectId }, null)
+    </div>
+    <table class="table table-bordered table-hover">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", "Material", new { id = item.Id }, null) |
-                @Html.ActionLink("Detalles", "Details", "Material", new { id = item.Id }, null) |
-                @Html.ActionLink("Borrar", "Delete", "Material", new { id = item.Id }, null)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    <a href="@item.Location" target="_blank">@(item.Location.Length > 50 ? item.Location.Substring(0, 50) + "..." : item.Location)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td class="col-md-3">
+                    @Html.ActionLink("Editar", "Edit", "Material", new { id = item.Id }, null) |
+                    @Html.ActionLink("Detalles", "Details", "Material", new { id = item.Id }, null) |
+                    @Html.ActionLink("Borrar", "Delete", "Material", new { id = item.Id }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
