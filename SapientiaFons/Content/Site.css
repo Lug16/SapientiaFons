@@ -1,5 +1,5 @@
 ﻿html {
-    background-color: #f8f9fd;
+    background-color: #fff;
 }
 
 body {
@@ -66,4 +66,13 @@ textarea {
 
 .jumbotron {
     background-color: #fff;
+}
+
+.well{
+    background-color:#fff;
+}
+
+footer{
+    position:absolute;
+    bottom:0px;
 }

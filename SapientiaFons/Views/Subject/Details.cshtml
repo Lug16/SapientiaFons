@@ -14,40 +14,42 @@
         @Html.ActionLink("Volver a la lista", "Index")
     </p>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+    <div class="well">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ShortUrl)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ShortUrl)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ShortUrl)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ShortUrl)
+            </dd>
 
-    </dl>
+        </dl>
+    </div>
 </div>
 <ul class="nav nav-tabs">
     <li role="presentation" class="active"><a data-toggle="tab" href="#h">Hipótesis</a> </li>
