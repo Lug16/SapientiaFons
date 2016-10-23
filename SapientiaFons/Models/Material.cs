@@ -12,9 +12,8 @@ namespace SapientiaFons.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(4)]
         [Display(Name = "Tipo")]
-        public string Type { get; set; }
+        public Enums.MaterialTypes Type { get; set; }
 
         [Required]
         [StringLength(2083)]

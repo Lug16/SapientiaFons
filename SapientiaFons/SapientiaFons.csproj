@@ -199,6 +199,10 @@
     <Compile Include="Migrations\201610220440555_AddingQuestions.Designer.cs">
       <DependentUpon>201610220440555_AddingQuestions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610230234315_ChangingMaterialType.cs" />
+    <Compile Include="Migrations\201610230234315_ChangingMaterialType.Designer.cs">
+      <DependentUpon>201610230234315_ChangingMaterialType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -348,6 +352,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610220440555_AddingQuestions.resx">
       <DependentUpon>201610220440555_AddingQuestions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610230234315_ChangingMaterialType.resx">
+      <DependentUpon>201610230234315_ChangingMaterialType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
