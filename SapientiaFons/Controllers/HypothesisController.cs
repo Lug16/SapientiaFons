@@ -1,4 +1,5 @@
-﻿using SapientiaFons.Models;
+﻿using Microsoft.AspNet.Identity;
+using SapientiaFons.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -17,11 +18,19 @@ namespace SapientiaFons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hypothesis hypothesis = db.Hypotheses.Find(id);
+
+            Hypothesis hypothesis = db.Hypotheses.Include(r => r.Subject).SingleOrDefault(r => r.Id == id);
+
             if (hypothesis == null)
             {
                 return HttpNotFound();
             }
+
+            if (hypothesis.Subject.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             return View(hypothesis);
         }
 
@@ -41,6 +50,13 @@ namespace SapientiaFons.Controllers
         {
             if (ModelState.IsValid)
             {
+                var subject = db.Subjects.Where(r => r.Id == hypothesis.SubjectId).Single();
+
+                if (subject.UserId != User.Identity.GetUserId())
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                }
+
                 db.Hypotheses.Add(hypothesis);
                 db.SaveChanges();
                 return RedirectToAction("Details", "Subject", new { id = hypothesis.SubjectId });
@@ -57,11 +73,18 @@ namespace SapientiaFons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hypothesis hypothesis = db.Hypotheses.Find(id);
+            Hypothesis hypothesis = db.Hypotheses.Include(r => r.Subject).SingleOrDefault(r => r.Id == id);
+
             if (hypothesis == null)
             {
                 return HttpNotFound();
             }
+
+            if (hypothesis.Subject.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "UserId", hypothesis.SubjectId);
             return View(hypothesis);
         }
@@ -75,7 +98,12 @@ namespace SapientiaFons.Controllers
         {
             if (ModelState.IsValid)
             {
-                var hypothesis = db.Hypotheses.Where(r => r.Id == viewModel.Id).Single();
+                Hypothesis hypothesis = db.Hypotheses.Include(r => r.Subject).SingleOrDefault(r => r.Id == viewModel.Id);
+
+                if (hypothesis.Subject.UserId != User.Identity.GetUserId())
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                }
 
                 hypothesis.Description = viewModel.Description;
                 hypothesis.IsValid = viewModel.IsValid;
@@ -94,11 +122,18 @@ namespace SapientiaFons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hypothesis hypothesis = db.Hypotheses.Find(id);
+            Hypothesis hypothesis = db.Hypotheses.Include(r => r.Subject).SingleOrDefault(r => r.Id == id);
+
             if (hypothesis == null)
             {
                 return HttpNotFound();
             }
+
+            if (hypothesis.Subject.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             return View(hypothesis);
         }
 
@@ -107,7 +142,13 @@ namespace SapientiaFons.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Hypothesis hypothesis = db.Hypotheses.Find(id);
+            Hypothesis hypothesis = db.Hypotheses.Include(r => r.Subject).SingleOrDefault(r => r.Id == id);
+
+            if (hypothesis.Subject.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             db.Hypotheses.Remove(hypothesis);
             db.SaveChanges();
             return RedirectToAction("Details", "Subject", new { id = hypothesis.SubjectId });

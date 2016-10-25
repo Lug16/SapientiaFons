@@ -1,5 +1,7 @@
-﻿using SapientiaFons.Models;
+﻿using Microsoft.AspNet.Identity;
+using SapientiaFons.Models;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -17,17 +19,30 @@ namespace SapientiaFons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Activity activity = db.Activities.Find(id);
+            Activity activity = db.Activities.Include(r => r.Subject).SingleOrDefault(r => r.Id == id);
             if (activity == null)
             {
                 return HttpNotFound();
             }
+
+            if (activity.Subject.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             return View(activity);
         }
 
         // GET: Activities/Create
         public ActionResult Create(int subjectId)
         {
+            var subject = db.Subjects.Where(r => r.Id == subjectId).Single();
+
+            if (subject.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             ViewBag.SubjectId = subjectId;
             return View();
         }
@@ -41,6 +56,13 @@ namespace SapientiaFons.Controllers
         {
             if (ModelState.IsValid)
             {
+                var subject = db.Subjects.Where(r => r.Id == activity.SubjectId).Single();
+
+                if (subject.UserId != User.Identity.GetUserId())
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                }
+
                 db.Activities.Add(activity);
                 db.SaveChanges();
                 return RedirectToAction("Details", "Subject", new { id = activity.SubjectId });
@@ -56,12 +78,17 @@ namespace SapientiaFons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Activity activity = db.Activities.Find(id);
+
+            Activity activity = db.Activities.Include(r => r.Subject).SingleOrDefault(r => r.Id == id);
+
             if (activity == null)
             {
                 return HttpNotFound();
             }
-
+            if (activity.Subject.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             return View(activity);
         }
 
@@ -89,10 +116,16 @@ namespace SapientiaFons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Activity activity = db.Activities.Find(id);
+            Activity activity = db.Activities.Include(r => r.Subject).SingleOrDefault(r => r.Id == id);
+
             if (activity == null)
             {
                 return HttpNotFound();
+            }
+
+            if (activity.Subject.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
             return View(activity);
         }

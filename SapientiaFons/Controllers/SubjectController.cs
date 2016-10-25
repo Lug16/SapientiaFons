@@ -35,6 +35,11 @@ namespace SapientiaFons.Controllers
                 return HttpNotFound();
             }
 
+            if (User.Identity.GetUserId() != subjectModel.UserId)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             ViewBag.SubjectId = id;
             ViewBag.Materials = db.Materials.Where(r => r.SubjectId == id).OrderBy(r => r.Description).ToArray();
             ViewBag.Activities = db.Activities.Where(r => r.SubjectId == id).OrderBy(r => r.Name).ToArray();
@@ -90,6 +95,12 @@ namespace SapientiaFons.Controllers
             {
                 return HttpNotFound();
             }
+
+            if (User.Identity.GetUserId() != subjectModel.UserId)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             //ViewBag.UserId = new SelectList(db.Users, "Id", "Email", subjectModel.UserId);
             return View(new SubjectViewModel { Id = id.Value, Description = subjectModel.Description, Title = subjectModel.Title });
         }
@@ -104,6 +115,11 @@ namespace SapientiaFons.Controllers
             if (ModelState.IsValid)
             {
                 var subject = db.Subjects.Where(r => r.Id == model.Id).Single();
+
+                if (User.Identity.GetUserId() != subject.UserId)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                }
 
                 subject.Title = model.Title;
                 subject.Description = model.Description;
@@ -128,6 +144,11 @@ namespace SapientiaFons.Controllers
             {
                 return HttpNotFound();
             }
+            if (User.Identity.GetUserId() != subjectModel.UserId)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             return View(new SubjectViewModel { Id = id.Value, Description = subjectModel.Description, Title = subjectModel.Title, Date = subjectModel.Date, ShortUrl = subjectModel.ShortUrl });
         }
 
@@ -137,6 +158,12 @@ namespace SapientiaFons.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Subject subjectModel = db.Subjects.Find(id);
+
+            if (User.Identity.GetUserId() != subjectModel.UserId)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             db.Subjects.Remove(subjectModel);
             db.SaveChanges();
             return RedirectToAction("Index");

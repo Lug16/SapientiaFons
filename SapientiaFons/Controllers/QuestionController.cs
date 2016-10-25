@@ -1,4 +1,5 @@
-﻿using SapientiaFons.Models;
+﻿using Microsoft.AspNet.Identity;
+using SapientiaFons.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -18,17 +19,30 @@ namespace SapientiaFons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Question question = db.Questions.Include(s => s.Hypothesis).Where(r => r.Id == id).Single();
+            Question question = db.Questions.Include(s => s.Hypothesis).Include(r => r.Subject).Where(r => r.Id == id).Single();
             if (question == null)
             {
                 return HttpNotFound();
             }
+
+            if (question.Subject.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             return View(question);
         }
 
         // GET: Question/Create
         public ActionResult Create(int subjectId, int? hypothesisId)
         {
+            var subject = db.Subjects.Where(r => r.Id == subjectId).Single();
+
+            if (subject.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             ViewBag.Hypotheses = db.Hypotheses.OrderBy(r => r.Description).Select(r => new SelectListItem { Text = r.Description, Value = r.Id.ToString() }).ToArray();
             ViewBag.SubjectId = subjectId;
             return View();
@@ -60,11 +74,17 @@ namespace SapientiaFons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Question question = db.Questions.Find(id);
+            Question question = db.Questions.Include(r => r.Subject).Single(r => r.Id == id);
             if (question == null)
             {
                 return HttpNotFound();
             }
+
+            if (question.Subject.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             ViewBag.HypothesisId = new SelectList(db.Hypotheses.OrderBy(r => r.Description), "Id", "Description", question.HypothesisId);
             ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "UserId", question.SubjectId);
             return View(question);
@@ -79,6 +99,13 @@ namespace SapientiaFons.Controllers
         {
             if (ModelState.IsValid)
             {
+                var subject = db.Subjects.Where(r => r.Id == question.SubjectId).Single();
+
+                if (subject.UserId != User.Identity.GetUserId())
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                }
+
                 db.Entry(question).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Details", "Subject", new { id = question.SubjectId });
@@ -95,11 +122,17 @@ namespace SapientiaFons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Question question = db.Questions.Include(s => s.Hypothesis).Where(r => r.Id == id).Single();
+            Question question = db.Questions.Include(s => s.Hypothesis).Include(r => r.Subject).Where(r => r.Id == id).Single();
             if (question == null)
             {
                 return HttpNotFound();
             }
+
+            if (question.Subject.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             return View(question);
         }
 
@@ -108,7 +141,13 @@ namespace SapientiaFons.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Question question = db.Questions.Find(id);
+            Question question = db.Questions.Include(r => r.Subject).Where(r => r.Id == id).Single();
+
+            if (question.Subject.UserId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             db.Questions.Remove(question);
             db.SaveChanges();
             return RedirectToAction("Details", "Subject", new { id = question.SubjectId });
