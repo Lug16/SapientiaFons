@@ -44,7 +44,7 @@ namespace SapientiaFons.Controllers
             ViewBag.Materials = db.Materials.Where(r => r.SubjectId == id).OrderBy(r => r.Description).ToArray();
             ViewBag.Activities = db.Activities.Where(r => r.SubjectId == id).OrderBy(r => r.Name).ToArray();
             ViewBag.Hypotheses = db.Hypotheses.Where(r => r.SubjectId == id).OrderBy(r => r.Description).ToArray();
-            ViewBag.Questions = db.Questions.Where(r => r.SubjectId == id).OrderBy(r => r.Description).ToArray();
+            ViewBag.Questions = db.Questions.Where(r => r.SubjectId == id).Include(r => r.Hypothesis).OrderBy(r => r.Description).ToArray();
 
             return View(new SubjectViewModel { Id = id.Value, Description = subjectModel.Description, Title = subjectModel.Title, Date = subjectModel.Date, ShortUrl = subjectModel.ShortUrl });
         }

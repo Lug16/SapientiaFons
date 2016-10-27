@@ -43,7 +43,15 @@ namespace SapientiaFons.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
 
-            ViewBag.Hypotheses = db.Hypotheses.OrderBy(r => r.Description).Select(r => new SelectListItem { Text = r.Description, Value = r.Id.ToString() }).ToArray();
+            ViewBag.Hypotheses = db.Hypotheses
+                                        .Where(r => r.SubjectId == subjectId)
+                                        .OrderBy(r => r.Description)
+                                        .Select(r =>
+                                            new SelectListItem
+                                            {
+                                                Text = r.Description,
+                                                Value = r.Id.ToString()
+                                            }).ToArray();
             ViewBag.SubjectId = subjectId;
             return View();
         }
@@ -85,7 +93,10 @@ namespace SapientiaFons.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
 
-            ViewBag.HypothesisId = new SelectList(db.Hypotheses.OrderBy(r => r.Description), "Id", "Description", question.HypothesisId);
+            ViewBag.HypothesisId = new SelectList(db.Hypotheses
+                                                        .Where(r => r.SubjectId == question.SubjectId)
+                                                        .OrderBy(r => r.Description), "Id", "Description", question.HypothesisId);
+
             ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "UserId", question.SubjectId);
             return View(question);
         }
