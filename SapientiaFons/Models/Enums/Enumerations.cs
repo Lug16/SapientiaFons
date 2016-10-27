@@ -2,7 +2,7 @@
 {
     public enum ActivityTypes
     {
-        QuestionAnswer
+        Hyphotesis
     }
 
     public enum MaterialTypes
