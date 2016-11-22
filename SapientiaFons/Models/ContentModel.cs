@@ -25,5 +25,11 @@ namespace SapientiaFons.Models
     {
         [JsonProperty("material")]
         public IEnumerable<Material> Materials { get; set; }
+
+        [JsonProperty("hypotheses")]
+        public IEnumerable<Hypothesis> Hypotheses { get; set; }
+
+        [JsonProperty("questions")]
+        public IEnumerable<Question> Questions { get; set; }
     }
 }

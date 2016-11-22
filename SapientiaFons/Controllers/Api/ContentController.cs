@@ -12,10 +12,14 @@ namespace SapientiaFons.Controllers.Api
         {
             var subject = db.Subjects.Single(r => r.ShortUrl == shortUrl);
             var materials = db.Materials.Where(r => r.SubjectId == subject.Id).ToArray();
+            var hypotheses = db.Hypotheses.Where(r => r.SubjectId == subject.Id).ToArray();
+            var questions = db.Questions.Where(r => r.SubjectId == subject.Id).ToArray();
 
             var body = new ContentBody
             {
-                Materials = materials
+                Materials = materials,
+                Hypotheses = hypotheses,
+                Questions = questions
             };
 
             var result = new ContentModel()
