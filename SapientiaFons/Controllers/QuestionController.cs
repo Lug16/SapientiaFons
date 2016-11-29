@@ -61,7 +61,7 @@ namespace SapientiaFons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Description,SubjectId,HypothesisId")] Question question)
+        public ActionResult Create([Bind(Include = "Id,Description,SubjectId,HypothesisId,IsValid")] Question question)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace SapientiaFons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Description,SubjectId,HypothesisId")] Question question)
+        public ActionResult Edit([Bind(Include = "Id,Description,SubjectId,HypothesisId,IsValid")] Question question)
         {
             if (ModelState.IsValid)
             {

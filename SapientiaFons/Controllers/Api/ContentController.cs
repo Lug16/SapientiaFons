@@ -1,4 +1,5 @@
 ﻿using SapientiaFons.Models;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 
@@ -11,9 +12,9 @@ namespace SapientiaFons.Controllers.Api
         public ContentModel Get(string shortUrl)
         {
             var subject = db.Subjects.Single(r => r.ShortUrl == shortUrl);
-            var materials = db.Materials.Where(r => r.SubjectId == subject.Id).ToArray();
-            var hypotheses = db.Hypotheses.Where(r => r.SubjectId == subject.Id).ToArray();
-            var questions = db.Questions.Where(r => r.SubjectId == subject.Id).ToArray();
+            var materials = db.Materials.Where(r => r.SubjectId == subject.Id).AsNoTracking().ToArray();
+            var hypotheses = db.Hypotheses.Where(r => r.SubjectId == subject.Id).AsNoTracking().ToArray();
+            var questions = db.Questions.Where(r => r.SubjectId == subject.Id).AsNoTracking().ToArray();
 
             var body = new ContentBody
             {

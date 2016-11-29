@@ -27,5 +27,10 @@ namespace SapientiaFons.Models
 
         [JsonProperty("hkey")]
         public int? HypothesisId { get; set; }
+
+        [Required]
+        [Display(Name = "Es Valido")]
+        [JsonProperty("valid")]
+        public bool IsValid { get; set; }
     }
 }
